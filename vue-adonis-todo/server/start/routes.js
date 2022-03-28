@@ -21,9 +21,19 @@ Route.get('/', () => {
 })
 
 // make route group with prefix /api/v1
-Route.group('/api/v1/auth', () => {
-  Route.post('login', 'UserController.login')
-  Route.post('register', 'UserController.register')
-  Route.post('forgot-password', 'AuthController.forgotPassword')
-  Route.post('reset-password', 'AuthController.resetPassword')
-}).prefix('/api/v1/auth')
+Route.group('/api/v1', () => {
+  Route.post('auth/login', 'UserController.login')
+  Route.post('auth/register', 'UserController.register')
+  Route.post('auth/forgot-password', 'AuthController.forgotPassword')
+  Route.post('auth/reset-password', 'AuthController.resetPassword')
+
+  // projects
+  Route.get('projects', 'ProjectController.index')
+    .middleware('auth')
+  Route.post('projects', 'ProjectController.create')
+    .middleware('auth')
+  Route.delete('projects/:id', 'ProjectController.destroy')
+    .middleware('auth')
+  Route.patch('projects/:id', 'ProjectController.update')
+    .middleware('auth')
+}).prefix('/api/v1')
