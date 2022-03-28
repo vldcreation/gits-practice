@@ -22,12 +22,8 @@ Route.get('/', () => {
 
 // make route group with prefix /api/v1
 Route.group('/api/v1/auth', () => {
-  Route.post('login', 'AuthController.login')
-  Route.post('register', async ({request}) =>{
-    return {
-      message: 'Hello World',
-    }
-  })
+  Route.post('login', 'UserController.login')
+  Route.post('register', 'UserController.register')
   Route.post('forgot-password', 'AuthController.forgotPassword')
   Route.post('reset-password', 'AuthController.resetPassword')
 }).prefix('/api/v1/auth')
